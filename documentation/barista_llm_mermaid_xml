@@ -1,0 +1,31 @@
+graph TD
+      subgraph State["State (TypedDict)"]
+          direction LR
+          messages["messages: Annotated[list, add_messages]"]
+          order["order: list[str]"]
+          finished["finished: bool"]
+      end
+
+      subgraph Graph
+          START((START)) --> barista
+
+          barista["<b>barista</b><br/>―――――――<br/>LLM generates response"]
+
+          barista --> router{tool_calls?}
+
+          router -->tools["<b>tools</b><br/>―――――――<br/>get_menu()"]
+
+          router --> order_node["<b>order_node</b><br/>―――――――<br/>add_to_order()<br/>get_order()<br/>confirm_order()<br/>place_order()<br/>clear_order()<br>calculate_total()"]
+
+          router -->|none| human["<b>human</b><br/>―――――――<br/>User input"]
+
+          tools --> barista
+
+          order_node --> order_router{place_order?}
+          order_router -->|yes| END((END))
+          order_router -->|no| barista
+
+          human --> human_router{bye/done?}
+          human_router -->|yes| END
+          human_router -->|no| barista
+      end

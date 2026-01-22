@@ -1,0 +1,18 @@
+# Core
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+pydantic>=2.0.0
+
+# LangGraph & LangChain
+langgraph>=0.3.0
+langchain-core>=0.3.0
+langchain-google-genai>=2.0.0
+
+# Google AI
+google-genai>=1.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# Dev / Testing
+pytest>=8.0.0
